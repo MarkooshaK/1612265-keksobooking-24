@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Марина Кохтенко](https://up.htmlacademy.ru/javascript/24/user/1612265).
-* Наставник: `Неизвестно`.
+* Наставник: [Герман Топалов](https://htmlacademy.ru/profile/topalov).
 
 ---
 
