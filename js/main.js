@@ -1,27 +1,28 @@
-const returnRandomIntegers = (from, to) => {
-  if(from >=0 && to <= Infinity) {
-    const number = Math.floor(Math.random() * (to - from + 1) ) + from;
-    if(to < from) {
-      to = from;
-      from = to;
-    }
-    return number;
+const getRandomIntegers = (from, to) => {
+  if (from < 0 || to < 0) {
+    throw new Error('Диапазон должен включать только положительные числа');
   }
-  throw new Error('Значения не подходят под условия задачи');
+  if (from === to) {
+    throw new Error('Диапазон не может состоять из равных значений');
+  }
+  if (from > to) {
+    throw new Error('Первый параметр не может быть больше второго');
+  }
+  return Math.floor(Math.random() * (to - from + 1) ) + from;
 };
 
-const returnRandomFractionalNumber = (from, to, numberOfDecimalPlaces) => {
-  if(from >=0 && to <= Infinity) {
-    const number = Math.random() * (to - from) + from;
-    if(to < from) {
-      to = from;
-      from = to;
-    }
-    return number.toFixed(numberOfDecimalPlaces);
+const getRandomFractionalNumber = (from, to, numberOfDecimalPlaces) => {
+  if (from < 0 || to < 0) {
+    throw new Error('Диапазон должен включать только положительные числа');
   }
-  throw new Error('Значения не подходят под условия задачи');
+  if (from === to) {
+    throw new Error('Диапазон не может состоять из равных значений');
+  }
+  if (from > to) {
+    throw new Error('Первый параметр не может быть больше второго');
+  }
+  return (Math.random() * (to - from) + from).toFixed(numberOfDecimalPlaces);
 };
 
-returnRandomIntegers(2,3);
-returnRandomFractionalNumber(3,6,6);
-
+getRandomIntegers(2, 3);
+getRandomFractionalNumber(3, 6, 6);
