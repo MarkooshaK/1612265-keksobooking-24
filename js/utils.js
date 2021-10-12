@@ -24,9 +24,6 @@ const getRandomFractionalNumber = (from, to, numberOfDecimalPlaces) => {
   return (Math.random() * (to - from) + from).toFixed(numberOfDecimalPlaces);
 };
 
-getRandomIntegers(2, 3);
-getRandomFractionalNumber(3, 6, 6);
-
 const getRandomArrayElement = (elements) => (
   elements[getRandomIntegers(0, elements.length - 1)]
 );

@@ -53,9 +53,5 @@ const getAdvertNearby = () => {
   return result;
 };
 
-const mockData = getAdvertNearby();
-
-getAdvertNearby();
-
-export {mockData};
+export {getAdvertNearby};
 

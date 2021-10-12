@@ -1,1 +1,3 @@
-import './mock-data.js';
+import {getAdvertNearby} from './mock-data.js';
+
+getAdvertNearby();
