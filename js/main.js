@@ -1,4 +1,13 @@
-import {getAdvertNearby} from './mock-data.js';
-import './similar-elements.js';
+import {generateNearbyAdverts} from './mock-data.js';
+//import {renderAdvertCard} from './advert-card.js';
+import {renderAdvertCard} from './advert-card.js';
 
-getAdvertNearby();
+const nearbyAdverts = generateNearbyAdverts();
+const mapCanvas = document.querySelector('#map-canvas');
+
+nearbyAdverts.forEach((advert) => {
+  const advertCard = renderAdvertCard(advert);
+  mapCanvas.appendChild(advertCard);
+});
+
+generateNearbyAdverts();
