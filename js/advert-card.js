@@ -1,7 +1,6 @@
 import './utils.js';
 
 const advertCardTemplate = document.querySelector('#card').content;
-//const mapCanvas = document.querySelector('#map-canvas');
 
 const OfferTypeDictionary = {
   flat: 'Квартира',
