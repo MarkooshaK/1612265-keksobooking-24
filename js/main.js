@@ -1,5 +1,4 @@
 import {generateNearbyAdverts} from './mock-data.js';
-//import {renderAdvertCard} from './advert-card.js';
 import {renderAdvertCard} from './advert-card.js';
 
 const nearbyAdverts = generateNearbyAdverts();
