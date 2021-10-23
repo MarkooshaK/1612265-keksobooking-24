@@ -6,6 +6,16 @@ advertForm.classList.add('ad-form--disabled');
 advertFormElements.disabled = true;
 mapFiltersForm.classList.add('map__filters--disabled');
 mapFiltersForm.children.disabled = true;
-console.log(mapFiltersForm.children);
+
+const runActivePageState = () => {
+  advertForm.classList.remove('ad-form--disabled');
+  advertFormElements.disabled = false;
+  mapFiltersForm.classList.remove('map__filters--disabled');
+  mapFiltersForm.children.disabled = false;
+};
+
+console.log('advertFormElements', advertFormElements);
+//runActivePageState();
+
 
 
