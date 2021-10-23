@@ -20,7 +20,7 @@ const MAX_ROOMS = 20;
 const MIN_GUESTS = 1;
 const MAX_GUESTS = 10;
 
-const getAdvertNearby = () => {
+const generateNearbyAdverts = () => {
   const result = [];
   for (let i = 1; i <= MOCK_OFFERS_AMOUNT; i++) {
     const avatarId = i < 10 ? `0${i}` : i = 10;
@@ -42,7 +42,7 @@ const getAdvertNearby = () => {
         checkout: getRandomArrayElement(CHECK_OUT_TIMES),
         features: FEATURES.slice(0, amount),
         description: getRandomArrayElement(DESCRIPTIONS),
-        photo: PHOTOS.slice(0, amount),
+        photos: PHOTOS.slice(0, amount),
       },
       location: {
         lat,
@@ -53,5 +53,5 @@ const getAdvertNearby = () => {
   return result;
 };
 
-export {getAdvertNearby};
+export {generateNearbyAdverts};
 
