@@ -1,5 +1,6 @@
 import {generateNearbyAdverts} from './mock-data.js';
 import {renderAdvertCard} from './advert-card.js';
+import {runDisabledPageState, runActivePageState} from './form.js';
 
 const nearbyAdverts = generateNearbyAdverts();
 const mapCanvas = document.querySelector('#map-canvas');
@@ -10,3 +11,5 @@ nearbyAdverts.forEach((advert) => {
 });
 
 generateNearbyAdverts();
+runDisabledPageState();
+runActivePageState();

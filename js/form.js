@@ -1,11 +1,18 @@
 const advertForm = document.querySelector('.ad-form');
 const advertFormElements = advertForm.querySelectorAll('.ad-form__element');
 const mapFiltersForm = document.querySelector('.map__filters');
+const mapFiltersFormElements  = mapFiltersForm.children;
 
-advertForm.classList.add('ad-form--disabled');
-advertFormElements.disabled = true;
-mapFiltersForm.classList.add('map__filters--disabled');
-mapFiltersForm.children.disabled = true;
+const runDisabledPageState = () => {
+  advertForm.classList.add('ad-form--disabled');
+  for (const advertFormElement of advertFormElements) {
+    advertFormElement.disabled = true;
+  }
+  mapFiltersForm.classList.add('map__filters--disabled');
+  for (const mapFiltersFormElement of mapFiltersFormElements) {
+    mapFiltersFormElement.disabled = true;
+  }
+};
 
 const runActivePageState = () => {
   advertForm.classList.remove('ad-form--disabled');
@@ -14,8 +21,7 @@ const runActivePageState = () => {
   mapFiltersForm.children.disabled = false;
 };
 
-console.log('advertFormElements', advertFormElements);
-//runActivePageState();
 
+export {runDisabledPageState, runActivePageState};
 
 
