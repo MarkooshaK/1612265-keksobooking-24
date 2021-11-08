@@ -40,12 +40,7 @@ const validateAdvertPrice = () => {
     advertPriceInput.setCustomValidity(`Максимально допустимая цена равна ${MAX_PRICE}`);
   }
 
-  switch(advertHouseTypeValue) {
-    case MinAdvertPrice:
-      advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]);
-      break;
-    default: break;
-  }
+  advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]);
 };
 
 
