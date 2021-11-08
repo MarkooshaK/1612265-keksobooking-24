@@ -1,8 +1,8 @@
 import {getRandomIntegers, getRandomFractionalNumber, getRandomArrayElement} from './utils.js';
-import {houseType} from './constants.js';
+import {HouseType} from './constants.js';
 
 const TITLES = ['Лучшее предложение', 'Выгоднее быть не может', 'Дешевле некуда'];
-const TYPES = Object.values(houseType);
+const TYPES = Object.values(HouseType);
 const CHECK_IN_TIMES = ['12:00', '13:00', '14:00'];
 const CHECK_OUT_TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];

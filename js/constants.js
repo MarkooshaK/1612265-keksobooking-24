@@ -1,4 +1,4 @@
-const houseType = {
+const HouseType = {
   Bungalow: 'bungalow',
   Flat: 'flat',
   Hotel: 'hotel',
@@ -6,4 +6,4 @@ const houseType = {
   Palace: 'palace',
 };
 
-export {houseType};
+export {HouseType};

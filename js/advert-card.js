@@ -1,15 +1,15 @@
 import './utils.js';
-import {houseType} from './constants.js';
+import {HouseType} from './constants.js';
 
 
 const advertCardTemplate = document.querySelector('#card').content;
 
 const OfferTypeDictionary = {
-  [houseType.Flat]: 'Квартира',
-  [houseType.Bungalow]: 'Бунгало',
-  [houseType.House]: 'Дом',
-  [houseType.Palace]: 'Дворец',
-  [houseType.Hotel]: 'Отель',
+  [HouseType.Flat]: 'Квартира',
+  [HouseType.Bungalow]: 'Бунгало',
+  [HouseType.House]: 'Дом',
+  [HouseType.Palace]: 'Дворец',
+  [HouseType.Hotel]: 'Отель',
 };
 
 const renderAdvertCard = (advert) => {
