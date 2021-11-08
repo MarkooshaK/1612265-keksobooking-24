@@ -1,6 +1,22 @@
+import {houseType} from './constants.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
+const roomsAmount = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  HUNDRED: '100',
+};
+
+const guestsAmount = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  NOT_FOR_GUEST: '0',
+};
+
 
 const advertForm = document.querySelector('.ad-form');
 const advertTitleInput = advertForm.querySelector('#title');
@@ -8,7 +24,13 @@ const advertPriceInput = advertForm.querySelector('#price');
 const advertHouseType = advertForm.querySelector('#type');
 const advertRoomNumber = advertForm.querySelector('#room_number');
 const advertCapacity = advertForm.querySelector('#capacity');
-
+const minAdvertPrice = {
+  [houseType.Bungalow]: 0,
+  [houseType.Flat]: 1000,
+  [houseType.Hotel]: 3000,
+  [houseType.House]: 5000,
+  [houseType.Palace]: 10000,
+};
 
 const validateAdvertPrice = () => {
   const advertPriceValue = advertPriceInput.value;
@@ -20,19 +42,19 @@ const validateAdvertPrice = () => {
 
   switch(advertHouseTypeValue) {
     case 'bungalow':
-      advertPriceInput.setAttribute('min', 0);
+      advertPriceInput.setAttribute('min', minAdvertPrice[advertHouseTypeValue]);
       break;
     case 'flat':
-      advertPriceInput.setAttribute('min', 1000);
+      advertPriceInput.setAttribute('min', minAdvertPrice[advertHouseTypeValue]);
       break;
     case 'hotel':
-      advertPriceInput.setAttribute('min', 3000);
+      advertPriceInput.setAttribute('min', minAdvertPrice[advertHouseTypeValue]);
       break;
     case 'house':
-      advertPriceInput.setAttribute('min', 5000);
+      advertPriceInput.setAttribute('min', minAdvertPrice[advertHouseTypeValue]);
       break;
     case 'palace':
-      advertPriceInput.setAttribute('min', 10000);
+      advertPriceInput.setAttribute('min', minAdvertPrice[advertHouseTypeValue]);
       break;
     default: break;
   }
@@ -41,41 +63,41 @@ const validateAdvertPrice = () => {
 
 const validateAdvertTitlle = () => {
   const titleValueLength = advertTitleInput.value.length;
-  let advertTitleError = '';
+  let error = '';
 
   if(titleValueLength < MIN_TITLE_LENGTH) {
-    advertTitleError = `Нужно ещё ${MIN_TITLE_LENGTH - titleValueLength} символов`;
+    error = `Нужно ещё ${MIN_TITLE_LENGTH - titleValueLength} символов`;
   } else if (titleValueLength > MAX_TITLE_LENGTH) {
-    advertTitleError =`Удалите лишние ${titleValueLength - MAX_TITLE_LENGTH} символов`;
+    error =`Удалите лишние ${titleValueLength - MAX_TITLE_LENGTH} символов`;
   } else {
-    advertTitleError = '';
+    error = '';
   }
 
-  advertTitleInput.setCustomValidity(advertTitleError);
+  advertTitleInput.setCustomValidity(error);
 };
 
 const validateAdvertCapacity  = () => {
   const advertRoomNumberValue = advertRoomNumber.value;
   const advertCapacityValue = advertCapacity.value;
-  let advertCapacityError = '';
+  let error = '';
 
-  if (advertRoomNumberValue === '1' && advertCapacityValue !== '1') {
-    advertCapacityError = '1 комната вмещает 1 гостя';
-  } else if (advertRoomNumberValue === '2' && advertCapacityValue === '3') {
-    advertCapacityError = '2 комнаты вмещает 1-го или 2-х гостей';
-  } else if (advertRoomNumberValue === '2' && advertCapacityValue === '0') {
-    advertCapacityError = '2 комнаты вмещает 1-го или 2-х гостей';
-  } else if (advertRoomNumberValue === '3' && advertCapacityValue === '0') {
-    advertCapacityError = '3 комнаты вмещает 1-го или 2-х или 3-х гостей';
-  } else if (advertRoomNumberValue === '100' && advertCapacityValue !== '0') {
-    advertCapacityError = '100 комнат - не для гостей';
+  if (advertRoomNumberValue === roomsAmount.ONE && advertCapacityValue !== guestsAmount.ONE) {
+    error = '1 комната вмещает 1 гостя';
+  } else if (advertRoomNumberValue === roomsAmount.TWO && advertCapacityValue === guestsAmount.THREE) {
+    error = '2 комнаты вмещает 1-го или 2-х гостей';
+  } else if (advertRoomNumberValue === roomsAmount.TWO && advertCapacityValue === guestsAmount.NOT_FOR_GUEST) {
+    error = '2 комнаты вмещает 1-го или 2-х гостей';
+  } else if (advertRoomNumberValue === roomsAmount.THREE && advertCapacityValue === guestsAmount.NOT_FOR_GUEST) {
+    error = '3 комнаты вмещает 1-го или 2-х или 3-х гостей';
+  } else if (advertRoomNumberValue === roomsAmount.HUNDRED && advertCapacityValue !== guestsAmount.NOT_FOR_GUEST) {
+    error = '100 комнат - не для гостей';
   }
 
-  advertRoomNumber.setCustomValidity(advertCapacityError);
+  advertRoomNumber.setCustomValidity(error);
 };
 
 
-const validateAdvertForm = () => { advertForm.addEventListener('change', (evt) => {
+advertForm.addEventListener('change', (evt) => {
   switch(evt.target) {
     case advertTitleInput:
       validateAdvertTitlle();
@@ -90,6 +112,3 @@ const validateAdvertForm = () => { advertForm.addEventListener('change', (evt) =
     default: break;
   }
 });
-};
-
-export {validateAdvertForm};
