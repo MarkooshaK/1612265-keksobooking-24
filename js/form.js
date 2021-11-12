@@ -24,6 +24,8 @@ const advertPriceInput = advertForm.querySelector('#price');
 const advertHouseType = advertForm.querySelector('#type');
 const advertRoomNumber = advertForm.querySelector('#room_number');
 const advertCapacity = advertForm.querySelector('#capacity');
+const advertTimeIn = advertForm.querySelector('#timein');
+const advertTimeOut = advertForm.querySelector('#timeout');
 const MinAdvertPrice = {
   [HouseType.Bungalow]: 0,
   [HouseType.Flat]: 1000,
@@ -79,6 +81,17 @@ const validateAdvertCapacity  = () => {
   advertRoomNumber.setCustomValidity(error);
 };
 
+const validateAdvertTime = () => {
+  const timeInValue = advertTimeIn.value;
+
+  if (timeInValue === '12:00') {
+    advertTimeOut.options[0].selected = true;
+  } else if (timeInValue === '14:00') {
+    advertTimeOut.options[2].selected = true;
+  } else if (timeInValue === '13:00') {
+    advertTimeOut.options[1].selected = true;
+  }
+};
 
 advertForm.addEventListener('change', (evt) => {
   switch(evt.target) {
@@ -91,6 +104,9 @@ advertForm.addEventListener('change', (evt) => {
     case advertRoomNumber:
     case advertCapacity:
       validateAdvertCapacity();
+      break;
+    case advertTimeIn:
+      validateAdvertTime();
       break;
     default: break;
   }
