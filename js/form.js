@@ -17,7 +17,6 @@ const GuestsAmount = {
   NOT_FOR_GUEST: '0',
 };
 
-
 const advertForm = document.querySelector('.ad-form');
 const advertTitleInput = advertForm.querySelector('#title');
 const advertPriceInput = advertForm.querySelector('#price');
@@ -38,15 +37,16 @@ const validateAdvertPrice = () => {
   const advertPriceValue = advertPriceInput.value;
   const advertHouseTypeValue = advertHouseType.value;
 
+
   if (advertPriceValue > MAX_PRICE) {
     advertPriceInput.setCustomValidity(`Максимально допустимая цена равна ${MAX_PRICE}`);
   }
 
-  advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]);
+  advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]),
+  advertPriceInput.placeholder = MinAdvertPrice[advertHouseType.value];
 };
 
-
-const validateAdvertTitlle = () => {
+const validateAdvertTitle = () => {
   const titleValueLength = advertTitleInput.value.length;
   let error = '';
 
@@ -81,24 +81,18 @@ const validateAdvertCapacity  = () => {
   advertRoomNumber.setCustomValidity(error);
 };
 
-const validateAdvertTime = () => {
-  const timeInValue = advertTimeIn.value;
-
-  if (timeInValue === '12:00') {
-    advertTimeOut.options[0].selected = true;
-  } else if (timeInValue === '14:00') {
-    advertTimeOut.options[2].selected = true;
-  } else if (timeInValue === '13:00') {
-    advertTimeOut.options[1].selected = true;
-  }
+const syncCheckingTimes = (selectedTime) => {
+  advertTimeIn.value = selectedTime;
+  advertTimeOut.value = selectedTime;
 };
 
 advertForm.addEventListener('change', (evt) => {
   switch(evt.target) {
     case advertTitleInput:
-      validateAdvertTitlle();
+      validateAdvertTitle();
       break;
     case advertPriceInput:
+    case advertHouseType:
       validateAdvertPrice();
       break;
     case advertRoomNumber:
@@ -106,8 +100,10 @@ advertForm.addEventListener('change', (evt) => {
       validateAdvertCapacity();
       break;
     case advertTimeIn:
-      validateAdvertTime();
+    case advertTimeOut:
+      syncCheckingTimes(evt.target.value);
       break;
     default: break;
   }
+
 });
