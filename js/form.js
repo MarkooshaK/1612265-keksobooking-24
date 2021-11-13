@@ -17,13 +17,14 @@ const GuestsAmount = {
   NOT_FOR_GUEST: '0',
 };
 
-
 const advertForm = document.querySelector('.ad-form');
 const advertTitleInput = advertForm.querySelector('#title');
 const advertPriceInput = advertForm.querySelector('#price');
 const advertHouseType = advertForm.querySelector('#type');
 const advertRoomNumber = advertForm.querySelector('#room_number');
 const advertCapacity = advertForm.querySelector('#capacity');
+const advertTimeIn = advertForm.querySelector('#timein');
+const advertTimeOut = advertForm.querySelector('#timeout');
 const MinAdvertPrice = {
   [HouseType.Bungalow]: 0,
   [HouseType.Flat]: 1000,
@@ -36,15 +37,16 @@ const validateAdvertPrice = () => {
   const advertPriceValue = advertPriceInput.value;
   const advertHouseTypeValue = advertHouseType.value;
 
+
   if (advertPriceValue > MAX_PRICE) {
     advertPriceInput.setCustomValidity(`Максимально допустимая цена равна ${MAX_PRICE}`);
   }
 
-  advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]);
+  advertPriceInput.setAttribute('min', MinAdvertPrice[advertHouseTypeValue]),
+  advertPriceInput.placeholder = MinAdvertPrice[advertHouseType.value];
 };
 
-
-const validateAdvertTitlle = () => {
+const validateAdvertTitle = () => {
   const titleValueLength = advertTitleInput.value.length;
   let error = '';
 
@@ -79,19 +81,29 @@ const validateAdvertCapacity  = () => {
   advertRoomNumber.setCustomValidity(error);
 };
 
+const syncCheckingTimes = (selectedTime) => {
+  advertTimeIn.value = selectedTime;
+  advertTimeOut.value = selectedTime;
+};
 
 advertForm.addEventListener('change', (evt) => {
   switch(evt.target) {
     case advertTitleInput:
-      validateAdvertTitlle();
+      validateAdvertTitle();
       break;
     case advertPriceInput:
+    case advertHouseType:
       validateAdvertPrice();
       break;
     case advertRoomNumber:
     case advertCapacity:
       validateAdvertCapacity();
       break;
+    case advertTimeIn:
+    case advertTimeOut:
+      syncCheckingTimes(evt.target.value);
+      break;
     default: break;
   }
+
 });
